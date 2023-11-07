@@ -11,7 +11,18 @@ module.exports = {
         tsconfig: "<rootDir>/tsconfig.jest.json", // tsconfig.jest.json 사용 설정
       },
     ],
+    "^.+\\.css$": "<rootDir>/src/jest/cssTransform.cjs",
+    "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)":
+      "<rootDir>/src/jest/fileTransform.cjs",
     // babel-jest를 이용하여 javascrit 사용 환경 설정 (cjs파일에서 import 활용 등)
     "^.+\\.(js|cjs|jsx)$": "babel-jest",
+  },
+  watchPlugins: [
+    "jest-watch-typeahead/filename",
+    "jest-watch-typeahead/testname",
+  ],
+  moduleNameMapper: {
+    "^.+\\.module\\.(css|sass|scss|tff|png)$": "identity-obj-proxy",
+    "^.+\\.svg$": "<rootDir>/src/__mocks__/svgrMock.cjs",
   },
 };
